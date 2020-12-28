@@ -1,9 +1,10 @@
 import React from 'react';
+import { NotFoundError } from '../components';
 
 const NotFound = () => {
   return (
     <div>
-      <h1>NotFound Page</h1>
+      <NotFoundError />
     </div>
   );
 };
