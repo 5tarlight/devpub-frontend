@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Home, Register, Login, NotFound } from '../pages';
 import { Header } from '../components';
 
-const App = () => {
+function App() {
   return (
     <Router>
       <div>
@@ -17,6 +17,6 @@ const App = () => {
       </div>
     </Router>
   );
-};
+}
 
 export default App;

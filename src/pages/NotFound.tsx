@@ -1,12 +1,12 @@
 import React from 'react';
 import { NotFoundError } from '../components';
 
-const NotFound = () => {
+function NotFound() {
   return (
     <div>
       <NotFoundError />
     </div>
   );
-};
+}
 
 export default NotFound;
