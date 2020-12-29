@@ -17,7 +17,7 @@
       background: #748ffc;
     }
 
-    &:active, &.active {
+    &.clicked {
       background: white;
       color: #5c7cfa;
     }
