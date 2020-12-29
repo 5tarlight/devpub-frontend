@@ -1,9 +1,12 @@
 import React from 'react';
-import './NotFoundError.css';
+import styles from './NotFoundError.scss';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 function NotFoundError() {
   return (
-    <div className="NotFound">
+    <div className={cx('not-found')}>
       <h1>NotFound Page</h1>
     </div>
   );

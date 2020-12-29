@@ -1,17 +1,20 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './Header.css';
+import style from './Header.scss';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(style);
 
 function Header() {
   return (
-    <div className="Header">
-      <NavLink to="/" className="item">
+    <div className={cx('header')}>
+      <NavLink to="/" className={cx('header-item')}>
         Home
       </NavLink>
-      <NavLink to="/login" className="item">
+      <NavLink to="/login" className={cx('header-item')}>
         Login
       </NavLink>
-      <NavLink to="/register" className="item">
+      <NavLink to="/register" className={cx('header-item')}>
         Register
       </NavLink>
     </div>
