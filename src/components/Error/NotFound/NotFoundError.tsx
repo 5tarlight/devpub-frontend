@@ -4,12 +4,12 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(styles);
 
-function NotFoundError() {
+const NotFoundError = () => {
   return (
     <div className={cx('not-found')}>
       <h1>NotFound Page</h1>
     </div>
   );
-}
+};
 
 export default NotFoundError;

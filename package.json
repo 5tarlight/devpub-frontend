@@ -30,6 +30,7 @@
     "prettier": "^2.2.1"
   },
   "scripts": {
+    "prestart": "yarn format",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
