@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Home, Login, NotFound, Register } from '../pages';
 import { Header } from './index';
 
-const Router = () => {
+interface Props {
+  isLoggedIn: boolean;
+}
+
+const Router: FC<Props> = ({ isLoggedIn }) => {
   return (
     <BrowserRouter>
-      <Header />
+      <Header isLoggedIn={isLoggedIn} />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/register" component={Register} />
