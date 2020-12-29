@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(style);
 
-function Header() {
+const Header = () => {
   return (
     <div className={cx('header')}>
       <NavLink to="/" className={cx('header-item')}>
@@ -19,6 +19,6 @@ function Header() {
       </NavLink>
     </div>
   );
-}
+};
 
 export default Header;
