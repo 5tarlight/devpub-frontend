@@ -5,20 +5,22 @@ import classNames from 'classnames/bind';
 
 const cx = classNames.bind(style);
 
-function Header() {
+const Header = () => {
+  const headerItems = [
+    { to: '/', value: 'Home' },
+    { to: '/login', value: 'Login' },
+    { to: '/register', value: 'Register' },
+  ];
+
   return (
-    <div className={cx('header')}>
-      <NavLink to="/" className={cx('header-item')}>
-        Home
-      </NavLink>
-      <NavLink to="/login" className={cx('header-item')}>
-        Login
-      </NavLink>
-      <NavLink to="/register" className={cx('header-item')}>
-        Register
-      </NavLink>
-    </div>
+    <header className={cx('header')}>
+      {headerItems.map((item, i) => (
+        <NavLink to={item.to} key={i} className={cx('header-item')}>
+          {item.value}
+        </NavLink>
+      ))}
+    </header>
   );
-}
+};
 
 export default Header;
