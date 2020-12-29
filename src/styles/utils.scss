@@ -1,0 +1,18 @@
+@import '~open-color/open-color';
+$theme-color-0: #5c5c5c;
+$theme-color-1: #707070;
+$theme-color-2: #8a8a8a;
+$theme-color-3: #a8a8a8;
+$theme-color-4: #c2c2c2;
+$theme-color-5: #e0e0e0;
+$theme-color-6: #f2f2f2;
+$theme-color-7: #ffffff;
+
+.no-drag {
+  flex: 1;
+  word-break: break-all;
+  -ms-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
