@@ -1,10 +1,9 @@
 import React, { ChangeEvent, FC, useState } from 'react';
 import styles from './RegisterForm.scss';
 import classNames from 'classnames/bind';
+import AuthInput from '../AuthInput/AuthInput';
 
 const cx = classNames.bind(styles);
-
-// interface Props {}
 
 const RegisterForm: FC = () => {
   const [email, setEmail] = useState('');
@@ -42,27 +41,13 @@ const RegisterForm: FC = () => {
 
   return (
     <div className={cx('register-form')}>
-      <input
-        className={cx('register-input')}
-        type={'email'}
-        placeholder={'Email'}
-        value={email}
-        onChange={onEmailChange}
-      />
-      <input
-        className={cx('register-input')}
+      <AuthInput type={'email'} value={email} onChange={onEmailChange} />
+      <AuthInput
         type={'password'}
-        placeholder={'Password'}
         value={password}
         onChange={onPasswordChange}
       />
-      <input
-        className={cx('register-input')}
-        type={'password'}
-        placeholder={'Confirm Password'}
-        value={confirm}
-        onChange={onConfirmChange}
-      />
+      <AuthInput type={'password'} value={confirm} onChange={onConfirmChange} />
       <div className={cx('confirm-msg')}>{confirmMsg}</div>
       <input type={'submit'} value={'Sign Up'} />
     </div>
