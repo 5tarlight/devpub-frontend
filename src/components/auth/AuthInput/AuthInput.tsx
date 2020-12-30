@@ -7,15 +7,16 @@ const cx = classNames.bind(styles);
 interface Props {
   type: string;
   value: string;
+  placeholder?: string;
   onChange(e: ChangeEvent<HTMLInputElement>): any;
 }
 
-const AuthInput: FC<Props> = ({ type, value, onChange }) => {
+const AuthInput: FC<Props> = ({ type, value, placeholder, onChange }) => {
   return (
     <input
       className={cx('register-input')}
       type={type}
-      placeholder={'Email'}
+      placeholder={placeholder}
       value={value}
       onChange={onChange}
     />
