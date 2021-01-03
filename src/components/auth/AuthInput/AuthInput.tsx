@@ -8,13 +8,14 @@ interface Props {
   type: string;
   value: string;
   placeholder?: string;
+  err?: string | undefined;
   onChange(e: ChangeEvent<HTMLInputElement>): any;
 }
 
-const AuthInput: FC<Props> = ({ type, value, placeholder, onChange }) => {
+const AuthInput: FC<Props> = ({ type, value, placeholder, err, onChange }) => {
   return (
     <input
-      className={cx('register-input')}
+      className={cx('register-input', { err: err })}
       type={type}
       placeholder={placeholder}
       value={value}
