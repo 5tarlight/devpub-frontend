@@ -107,6 +107,10 @@ const RegisterForm: FC = () => {
 
   return (
     <div className={cx('register-form')}>
+      <div className={cx('register-title')}>
+        <h1>회원가입</h1>
+        <p>데브라이프 계정으로 모든 서비스를 이용하실 수 있습니다.</p>
+      </div>
       <AuthInput
         err={emailMsg}
         type={'email'}
