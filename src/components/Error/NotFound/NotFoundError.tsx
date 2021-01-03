@@ -3,6 +3,7 @@ import styles from './NotFoundError.scss';
 import classNames from 'classnames/bind';
 import { useHistory } from 'react-router-dom';
 import fox from './fox.png';
+import Button from '../../Button/Button';
 
 const cx = classNames.bind(styles);
 
@@ -20,9 +21,7 @@ const NotFoundError = () => {
         <h1>Oops! 잘못 찾아오셨습니다.</h1>
         <h3>이동하려는 주소가 올바른지 확인해주세요.</h3>
       </div>
-      <button className={cx('home-btn', 'no-drag')} onClick={redirect}>
-        메인으로 돌아가기
-      </button>
+      <Button value={'메인으로 돌아가기'} onClick={redirect} />
     </div>
   );
 };

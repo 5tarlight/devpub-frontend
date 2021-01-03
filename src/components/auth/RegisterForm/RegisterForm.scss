@@ -29,12 +29,12 @@
   border: 2px solid $theme-color-1;
   border-radius: 18px;
   transition: transform 0.1s;
-}
 
-.submit:hover {
-  background-color: $theme-color-1;
-  border: 2px solid $theme-color-0;
-  transform: scale(1.1);
+  &:hover {
+    background-color: $theme-color-1;
+    border: 2px solid $theme-color-0;
+    transform: scale(1.1);
+  }
 }
 
 .register-title {
