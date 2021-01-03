@@ -144,7 +144,7 @@ const RegisterForm: FC = () => {
         onChange={onConfirmChange}
       />
       <button className={cx('submit')} onClick={onSubmit}>
-        Sign Up
+        회원가입
       </button>
     </div>
   );
