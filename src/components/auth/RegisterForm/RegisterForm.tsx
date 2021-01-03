@@ -21,21 +21,28 @@ const RegisterForm: FC = () => {
   const [confirmMsg, setConfirmMsg] = useState('');
 
   const checkEmail = () => {
-    if (email.includes('@')) {
-      setEmailMsg('');
-      return true;
-    } else {
+
+    if (!email.includes('@') || email.split('@').length > 2) {
       setEmailMsg('Email is not valid');
       return false;
+    } else if (email.length > 50) {
+      setEmailMsg('Email is too long');
+      return false
+    } else {
+      setEmailMsg('');
+      return true;
     }
   };
   const checkDisplayedName = () => {
-    if (displayedName) {
-      setNameMsg('');
-      return true;
-    } else {
+    if (!displayedName) {
       setNameMsg('DisplayedName is required');
       return false;
+    } else if (displayedName.length > 30) {
+      setNameMsg('DisplayedName is too long');
+      return false;
+    } else {
+      setNameMsg('');
+      return true;
     }
   };
   const checkPassword = () => {
