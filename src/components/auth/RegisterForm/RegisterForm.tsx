@@ -7,6 +7,7 @@ import React, {
 import styles from './RegisterForm.scss';
 import classNames from 'classnames/bind';
 import AuthInput from '../AuthInput/AuthInput';
+import Button from '../../Button/Button';
 
 const cx = classNames.bind(styles);
 
@@ -143,9 +144,7 @@ const RegisterForm: FC = () => {
         placeholder={'비밀번호 확인'}
         onChange={onConfirmChange}
       />
-      <button className={cx('submit', 'no-drag')} onClick={onSubmit}>
-        회원가입
-      </button>
+      <Button value={'회원가입'} onClick={onSubmit} />
     </div>
   );
 };
