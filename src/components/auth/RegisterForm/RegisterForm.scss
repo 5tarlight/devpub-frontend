@@ -25,13 +25,16 @@
   width: 200px;
   color: white;
   height: 40px;
-  border: 0;
+  border: 2px solid $theme-color-1;
   border-radius: 18px;
-  outline: 0;
   transition: transform 0.1s;
 }
 
 .submit:hover {
   background-color: $theme-color-1;
   transform: scale(1.1);
+}
+
+.register-title {
+  margin: 10px;
 }
