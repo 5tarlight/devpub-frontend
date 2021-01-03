@@ -111,6 +111,7 @@ const RegisterForm: FC = () => {
         <h1>회원가입</h1>
         <p>데브라이프 계정으로 모든 서비스를 이용하실 수 있습니다.</p>
       </div>
+      <div className={cx('error-msg')}>{emailMsg}</div>
       <AuthInput
         err={emailMsg}
         type={'email'}
@@ -118,7 +119,7 @@ const RegisterForm: FC = () => {
         placeholder={'Email'}
         onChange={onEmailChange}
       />
-      <div className={cx('error-msg')}>{emailMsg}</div>
+      <div className={cx('error-msg')}>{nameMsg}</div>
       <AuthInput
         err={nameMsg}
         type={'text'}
@@ -126,7 +127,7 @@ const RegisterForm: FC = () => {
         placeholder={'Displayed Name'}
         onChange={onDisplayedNameChange}
       />
-      <div className={cx('error-msg')}>{nameMsg}</div>
+      <div className={cx('error-msg')}>{pwMsg}</div>
       <AuthInput
         err={pwMsg}
         type={'password'}
@@ -134,7 +135,7 @@ const RegisterForm: FC = () => {
         placeholder={'Password'}
         onChange={onPasswordChange}
       />
-      <div className={cx('error-msg')}>{pwMsg}</div>
+      <div className={cx('error-msg')}>{confirmMsg}</div>
       <AuthInput
         err={confirmMsg}
         type={'password'}
@@ -142,7 +143,6 @@ const RegisterForm: FC = () => {
         placeholder={'Confirm Password'}
         onChange={onConfirmChange}
       />
-      <div className={cx('error-msg')}>{confirmMsg}</div>
       <button className={cx('submit')} onClick={onSubmit}>
         Sign Up
       </button>
