@@ -29,7 +29,7 @@ const Header: FC<Props> = ({ isLoggedIn }) => {
         (i.shouldLoggedIn == 1 && isLoggedIn),
     )
     .map((item, i) => (
-      <NavLink to={item.to} key={i} className={cx('header-item')}>
+      <NavLink to={item.to} key={i} className={cx('header-item', 'no-drag')}>
         {item.value}
       </NavLink>
     ));

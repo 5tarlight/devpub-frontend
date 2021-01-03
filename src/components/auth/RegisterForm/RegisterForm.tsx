@@ -73,7 +73,7 @@ const RegisterForm: FC = () => {
         placeholder={'Confirm Password'}
         onChange={onConfirmChange}
       />
-      <div className={cx('confirm-msg')}>{confirmMsg}</div>
+      <div className={cx('error-msg')}>{confirmMsg}</div>
       <input type={'submit'} value={'Sign Up'} />
     </div>
   );
