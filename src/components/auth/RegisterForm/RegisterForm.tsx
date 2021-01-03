@@ -22,10 +22,10 @@ const RegisterForm: FC = () => {
 
   const checkEmail = () => {
     if (!email.includes('@') || email.split('@').length > 2) {
-      setEmailMsg('Email is not valid');
+      setEmailMsg('이메일이 유효하지 않습니다.');
       return false;
     } else if (email.length > 50) {
-      setEmailMsg('Email is too long');
+      setEmailMsg('이메일이 너무 깁니다.');
       return false;
     } else {
       setEmailMsg('');
@@ -34,10 +34,10 @@ const RegisterForm: FC = () => {
   };
   const checkDisplayedName = () => {
     if (!displayedName) {
-      setNameMsg('DisplayedName is required');
+      setNameMsg('사용자 이름을 입력해주세요.');
       return false;
     } else if (displayedName.length > 30) {
-      setNameMsg('DisplayedName is too long');
+      setNameMsg('사용자 이름이 너무 깁니다.');
       return false;
     } else {
       setNameMsg('');
@@ -46,13 +46,13 @@ const RegisterForm: FC = () => {
   };
   const checkPassword = () => {
     if (!password) {
-      setPwMsg('Password is required');
+      setPwMsg('비밀번호를 입력해주세요.');
       return false;
     } else if (password.length < 4) {
-      setPwMsg('Password is too short');
+      setPwMsg('비밀번호가 너무 짧습니다.');
       return false;
     } else if (password.length > 20) {
-      setPwMsg('Password is too long');
+      setPwMsg('비밀번호가 너무 깁니다.');
       return false;
     } else {
       setPwMsg('');
@@ -61,7 +61,7 @@ const RegisterForm: FC = () => {
   };
   const checkConfirm = () => {
     if (confirm !== password) {
-      setConfirmMsg('Password incorrect');
+      setConfirmMsg('비밀번호가 일치하지 않습니다.');
     } else {
       setConfirmMsg('');
     }
