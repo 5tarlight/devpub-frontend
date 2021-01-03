@@ -15,10 +15,10 @@ const Header: FC<Props> = ({ isLoggedIn }) => {
   // shouldLoggedIn: 1 => isLoggedIn must be true
 
   const headerItems = [
-    { to: '/', value: '🏠 Home', shouldLoggedIn: 0 },
-    { to: '/login', value: '🔑 Login', shouldLoggedIn: -1 },
-    { to: '/register', value: '🔐 Register', shouldLoggedIn: -1 },
-    { to: '/profile', value: '🧑 Profile', shouldLoggedIn: 1 },
+    { to: '/', value: '홈', shouldLoggedIn: 0 },
+    { to: '/login', value: '로그인', shouldLoggedIn: -1 },
+    { to: '/register', value: '회원가입', shouldLoggedIn: -1 },
+    { to: '/profile', value: '프로필', shouldLoggedIn: 1 },
   ];
 
   const navs = headerItems
