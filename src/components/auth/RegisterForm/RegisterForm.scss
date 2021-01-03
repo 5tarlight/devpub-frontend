@@ -1,3 +1,5 @@
+@import '../../../styles/utils';
+
 .error-msg {
   color: red;
   font-style: italic;
@@ -15,4 +17,19 @@
   padding-top: 10rem;
   padding-bottom: 10rem;
   text-align: center;
+}
+
+.submit {
+  margin-top: 10px;
+  background-color: $theme-color-0;
+  width: 200px;
+  color: white;
+  height: 40px;
+  border: 0;
+  border-radius: 18px;
+  outline: 0;
+}
+
+.submit:hover {
+  background-color: $theme-color-1;
 }
