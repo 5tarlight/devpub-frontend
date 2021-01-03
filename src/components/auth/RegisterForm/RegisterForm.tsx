@@ -143,7 +143,7 @@ const RegisterForm: FC = () => {
         placeholder={'비밀번호 확인'}
         onChange={onConfirmChange}
       />
-      <button className={cx('submit')} onClick={onSubmit}>
+      <button className={cx('submit', 'no-drag')} onClick={onSubmit}>
         회원가입
       </button>
     </div>
