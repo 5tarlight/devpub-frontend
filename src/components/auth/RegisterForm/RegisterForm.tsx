@@ -21,13 +21,12 @@ const RegisterForm: FC = () => {
   const [confirmMsg, setConfirmMsg] = useState('');
 
   const checkEmail = () => {
-
     if (!email.includes('@') || email.split('@').length > 2) {
       setEmailMsg('Email is not valid');
       return false;
     } else if (email.length > 50) {
       setEmailMsg('Email is too long');
-      return false
+      return false;
     } else {
       setEmailMsg('');
       return true;
@@ -109,6 +108,7 @@ const RegisterForm: FC = () => {
   return (
     <div className={cx('register-form')}>
       <AuthInput
+        err={emailMsg}
         type={'email'}
         value={email}
         placeholder={'Email'}
@@ -116,6 +116,7 @@ const RegisterForm: FC = () => {
       />
       <div className={cx('error-msg')}>{emailMsg}</div>
       <AuthInput
+        err={nameMsg}
         type={'text'}
         value={displayedName}
         placeholder={'Displayed Name'}
@@ -123,6 +124,7 @@ const RegisterForm: FC = () => {
       />
       <div className={cx('error-msg')}>{nameMsg}</div>
       <AuthInput
+        err={pwMsg}
         type={'password'}
         value={password}
         placeholder={'Password'}
@@ -130,6 +132,7 @@ const RegisterForm: FC = () => {
       />
       <div className={cx('error-msg')}>{pwMsg}</div>
       <AuthInput
+        err={confirmMsg}
         type={'password'}
         value={confirm}
         placeholder={'Confirm Password'}

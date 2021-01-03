@@ -4,4 +4,8 @@
   width: 300px;
   height: 40px;
   font-size: 17px;
+
+  &.err {
+    border-color: red;
+  }
 }
