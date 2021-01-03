@@ -8,11 +8,22 @@
   font-size: 17px;
   
   &.err {
-    border-color: red;
+    animation-name: error-focus;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
   }
   
   border: solid 2px $theme-color-0;
   border-radius: 7px;
   padding-left: 5px;
   padding-right: 5px;
+}
+
+@keyframes error-focus {
+  from {
+    border-color: $theme-color-0;
+  }
+  to {
+    border-color: red;
+  }
 }
