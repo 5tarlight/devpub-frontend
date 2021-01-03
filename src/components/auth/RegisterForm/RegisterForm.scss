@@ -22,6 +22,7 @@
 .submit {
   margin-top: 10px;
   background-color: $theme-color-0;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   width: 200px;
   color: white;
   height: 40px;
@@ -32,6 +33,7 @@
 
 .submit:hover {
   background-color: $theme-color-1;
+  border: 2px solid $theme-color-0;
   transform: scale(1.1);
 }
 
