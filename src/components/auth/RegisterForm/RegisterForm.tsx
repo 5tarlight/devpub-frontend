@@ -61,7 +61,7 @@ const RegisterForm: FC = () => {
   };
   const checkConfirm = () => {
     if (confirm !== password) {
-      setConfirmMsg('Password is not equal');
+      setConfirmMsg('Password incorrect');
     } else {
       setConfirmMsg('');
     }
