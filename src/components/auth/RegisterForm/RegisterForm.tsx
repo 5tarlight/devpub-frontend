@@ -116,7 +116,7 @@ const RegisterForm: FC = () => {
         err={emailMsg}
         type={'email'}
         value={email}
-        placeholder={'Email'}
+        placeholder={'이메일'}
         onChange={onEmailChange}
       />
       <div className={cx('error-msg')}>{nameMsg}</div>
@@ -124,7 +124,7 @@ const RegisterForm: FC = () => {
         err={nameMsg}
         type={'text'}
         value={displayedName}
-        placeholder={'Displayed Name'}
+        placeholder={'사용자 이름'}
         onChange={onDisplayedNameChange}
       />
       <div className={cx('error-msg')}>{pwMsg}</div>
@@ -132,7 +132,7 @@ const RegisterForm: FC = () => {
         err={pwMsg}
         type={'password'}
         value={password}
-        placeholder={'Password'}
+        placeholder={'비밀번호'}
         onChange={onPasswordChange}
       />
       <div className={cx('error-msg')}>{confirmMsg}</div>
@@ -140,11 +140,11 @@ const RegisterForm: FC = () => {
         err={confirmMsg}
         type={'password'}
         value={confirm}
-        placeholder={'Confirm Password'}
+        placeholder={'비밀번호 확인'}
         onChange={onConfirmChange}
       />
       <button className={cx('submit')} onClick={onSubmit}>
-        Sign Up
+        회원가입
       </button>
     </div>
   );
