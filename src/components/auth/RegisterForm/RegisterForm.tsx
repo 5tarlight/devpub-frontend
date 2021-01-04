@@ -20,6 +20,8 @@ const RegisterForm: FC = () => {
   const [pwMsg, setPwMsg] = useState('');
   const [confirm, setConfirm] = useState('');
   const [confirmMsg, setConfirmMsg] = useState('');
+  const [policyCheck, setPolicyCheck] = useState(false);
+  const [tosCheck, setTosCheck] = useState(false);
 
   const checkEmail = () => {
     if (!email.includes('@') || email.split('@').length > 2) {
@@ -67,6 +69,20 @@ const RegisterForm: FC = () => {
       setConfirmMsg('');
     }
   };
+  const checkTos = () => {
+    if (tosCheck) return true;
+    else {
+      alert('서비스 이용약관에 동의해 주세요.');
+      return false;
+    }
+  };
+  const checkPolicy = () => {
+    if (policyCheck) return true;
+    else {
+      alert('개인정보 처리방침에 동의해주세요.');
+      return false;
+    }
+  };
 
   const onEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
@@ -100,8 +116,10 @@ const RegisterForm: FC = () => {
     const cn = checkDisplayedName();
     const pc = checkPassword();
     const pcn = checkConfirm();
+    const tc = checkTos();
+    const plc = checkPolicy();
 
-    if (ce && cn && pc && pcn) {
+    if (ce && cn && pc && pcn && tc && plc) {
       // Register here
     }
   };
@@ -151,11 +169,19 @@ const RegisterForm: FC = () => {
         onChange={onConfirmChange}
       />
       <div className={cx('policyCheck')}>
-        <input type={'checkbox'} />
+        <input
+          type={'checkbox'}
+          checked={tosCheck}
+          onChange={() => setTosCheck(!tosCheck)}
+        />
         <label>서비스 이용약관에 동의합니다.</label>
       </div>
       <div className={cx('policyCheck')}>
-        <input type={'checkbox'} />
+        <input
+          type={'checkbox'}
+          checked={policyCheck}
+          onChange={() => setPolicyCheck(!policyCheck)}
+        />
         <label>개인정보 처리방침에 동의합니다.</label>
       </div>
       <Button value={'회원가입'} onClick={onSubmit} />
