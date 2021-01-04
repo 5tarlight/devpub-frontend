@@ -106,6 +106,12 @@ const RegisterForm: FC = () => {
     }
   };
 
+  const policyStyle = {
+    color: 'gray',
+    marginTop: '20px',
+    fontSize: '12px',
+  };
+
   return (
     <div className={cx('register-form')}>
       <div className={cx('register-title')}>
@@ -145,6 +151,10 @@ const RegisterForm: FC = () => {
         onChange={onConfirmChange}
       />
       <Button value={'회원가입'} onClick={onSubmit} />
+      <p style={policyStyle}>
+        데브라이프 서비스에 가입함으로써 이용약관, 개인정보처리방침에
+        동의합니다.
+      </p>
     </div>
   );
 };
