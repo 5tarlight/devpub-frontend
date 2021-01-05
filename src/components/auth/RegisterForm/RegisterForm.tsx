@@ -8,10 +8,14 @@ import styles from './RegisterForm.scss';
 import classNames from 'classnames/bind';
 import AuthInput from '../AuthInput/AuthInput';
 import Button from '../../Button/Button';
+import axios from 'axios';
+import { server } from '../../../secret';
+import { useHistory } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 const RegisterForm: FC = () => {
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [emailMsg, setEmailMsg] = useState('');
   const [displayedName, setDisplayedName] = useState('');
@@ -65,8 +69,10 @@ const RegisterForm: FC = () => {
   const checkConfirm = () => {
     if (confirm !== password) {
       setConfirmMsg('비밀번호가 일치하지 않습니다.');
+      return false;
     } else {
       setConfirmMsg('');
+      return true;
     }
   };
   const checkTos = () => {
@@ -110,7 +116,9 @@ const RegisterForm: FC = () => {
     setConfirm(value);
   };
 
-  const onSubmit = (e: ReactMouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const onSubmit = async (
+    e: ReactMouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
     e.preventDefault();
     const ce = checkEmail();
     const cn = checkDisplayedName();
@@ -120,7 +128,32 @@ const RegisterForm: FC = () => {
     const plc = checkPolicy();
 
     if (ce && cn && pc && pcn && tc && plc) {
-      // Register here
+      console.log('start register process');
+      const query =
+        'mutation {\n' +
+        '  register(email: "' +
+        email +
+        '", displayedName: "' +
+        displayedName +
+        '", password: "' +
+        password +
+        '") {\n' +
+        '    id\n' +
+        '    email\n' +
+        '    displayedName\n' +
+        '  }\n' +
+        '}';
+      const serverRes = await axios.post(server, query, {
+        headers: { 'Content-Type': 'application/graphql' },
+      });
+
+      if (serverRes.status === 400) {
+        setEmailMsg('이미 해당 이메일이 사용 중 입니다.');
+        return;
+      } else {
+        console.dir(serverRes.data);
+        history.push('/');
+      }
     }
   };
 

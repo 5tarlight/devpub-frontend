@@ -13,6 +13,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.14",
     "@types/react-router-dom": "^5.1.6",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "node-sass": "4.14.1",
     "open-color": "^1.7.0",
@@ -28,6 +29,7 @@
     "web-vitals": "^0.2.4"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@typescript-eslint/eslint-plugin": "^4.11.0",
     "@typescript-eslint/parser": "^4.11.0",
     "eslint-config-prettier": "^7.1.0",
