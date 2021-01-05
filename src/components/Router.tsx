@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Home, Login, NotFound, Register } from '../pages';
-import { Header } from './index';
+import { Header, Footer } from './index';
 
 interface Props {
   isLoggedIn: boolean;
@@ -17,6 +17,7 @@ const Router: FC<Props> = ({ isLoggedIn }) => {
         <Route exact path="/login" component={Login} />
         <Route component={NotFound} />
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 };
