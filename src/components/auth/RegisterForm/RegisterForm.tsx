@@ -14,7 +14,21 @@ import { useHistory } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-const RegisterForm: FC = () => {
+type Props = {
+  success: boolean;
+  id?: string;
+  email?: string;
+  displayedName?: string;
+  onRegister: (email: string, displayedName: string, password: string) => void;
+};
+
+const RegisterForm: FC<Props> = ({
+  success,
+  id,
+  email: resultMail,
+  displayedName: resultName,
+  onRegister,
+}) => {
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [emailMsg, setEmailMsg] = useState('');
