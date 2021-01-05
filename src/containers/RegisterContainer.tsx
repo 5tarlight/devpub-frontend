@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { RegisterForm } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../modules';

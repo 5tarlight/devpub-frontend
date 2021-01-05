@@ -142,32 +142,8 @@ const RegisterForm: FC<Props> = ({
     const plc = checkPolicy();
 
     if (ce && cn && pc && pcn && tc && plc) {
-      console.log('start register process');
-      const query =
-        'mutation {\n' +
-        '  register(email: "' +
-        email +
-        '", displayedName: "' +
-        displayedName +
-        '", password: "' +
-        password +
-        '") {\n' +
-        '    id\n' +
-        '    email\n' +
-        '    displayedName\n' +
-        '  }\n' +
-        '}';
-      const serverRes = await axios.post(server, query, {
-        headers: { 'Content-Type': 'application/graphql' },
-      });
-
-      if (serverRes.status === 400) {
-        setEmailMsg('이미 해당 이메일이 사용 중 입니다.');
-        return;
-      } else {
-        console.dir(serverRes.data);
-        history.push('/');
-      }
+      onRegister(email, displayedName, password);
+      alert(success);
     }
   };
 
