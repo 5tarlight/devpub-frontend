@@ -8,10 +8,14 @@ import styles from './RegisterForm.scss';
 import classNames from 'classnames/bind';
 import AuthInput from '../AuthInput/AuthInput';
 import Button from '../../Button/Button';
+import axios from 'axios';
+import { server } from '../../../secret';
+import { useHistory } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 const RegisterForm: FC = () => {
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [emailMsg, setEmailMsg] = useState('');
   const [displayedName, setDisplayedName] = useState('');
@@ -20,6 +24,8 @@ const RegisterForm: FC = () => {
   const [pwMsg, setPwMsg] = useState('');
   const [confirm, setConfirm] = useState('');
   const [confirmMsg, setConfirmMsg] = useState('');
+  const [policyCheck, setPolicyCheck] = useState(false);
+  const [tosCheck, setTosCheck] = useState(false);
 
   const checkEmail = () => {
     if (!email.includes('@') || email.split('@').length > 2) {
@@ -63,8 +69,24 @@ const RegisterForm: FC = () => {
   const checkConfirm = () => {
     if (confirm !== password) {
       setConfirmMsg('비밀번호가 일치하지 않습니다.');
+      return false;
     } else {
       setConfirmMsg('');
+      return true;
+    }
+  };
+  const checkTos = () => {
+    if (tosCheck) return true;
+    else {
+      alert('서비스 이용약관에 동의해 주세요.');
+      return false;
+    }
+  };
+  const checkPolicy = () => {
+    if (policyCheck) return true;
+    else {
+      alert('개인정보 처리방침에 동의해주세요.');
+      return false;
     }
   };
 
@@ -94,15 +116,44 @@ const RegisterForm: FC = () => {
     setConfirm(value);
   };
 
-  const onSubmit = (e: ReactMouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const onSubmit = async (
+    e: ReactMouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
     e.preventDefault();
     const ce = checkEmail();
     const cn = checkDisplayedName();
     const pc = checkPassword();
     const pcn = checkConfirm();
+    const tc = checkTos();
+    const plc = checkPolicy();
 
-    if (ce && cn && pc && pcn) {
-      // Register here
+    if (ce && cn && pc && pcn && tc && plc) {
+      console.log('start register process');
+      const query =
+        'mutation {\n' +
+        '  register(email: "' +
+        email +
+        '", displayedName: "' +
+        displayedName +
+        '", password: "' +
+        password +
+        '") {\n' +
+        '    id\n' +
+        '    email\n' +
+        '    displayedName\n' +
+        '  }\n' +
+        '}';
+      const serverRes = await axios.post(server, query, {
+        headers: { 'Content-Type': 'application/graphql' },
+      });
+
+      if (serverRes.status === 400) {
+        setEmailMsg('이미 해당 이메일이 사용 중 입니다.');
+        return;
+      } else {
+        console.dir(serverRes.data);
+        history.push('/');
+      }
     }
   };
 
@@ -151,11 +202,19 @@ const RegisterForm: FC = () => {
         onChange={onConfirmChange}
       />
       <div className={cx('policyCheck')}>
-        <input type={'checkbox'} />
+        <input
+          type={'checkbox'}
+          checked={tosCheck}
+          onChange={() => setTosCheck(!tosCheck)}
+        />
         <label>서비스 이용약관에 동의합니다.</label>
       </div>
       <div className={cx('policyCheck')}>
-        <input type={'checkbox'} />
+        <input
+          type={'checkbox'}
+          checked={policyCheck}
+          onChange={() => setPolicyCheck(!policyCheck)}
+        />
         <label>개인정보 처리방침에 동의합니다.</label>
       </div>
       <Button value={'회원가입'} onClick={onSubmit} />
