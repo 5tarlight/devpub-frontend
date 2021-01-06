@@ -1,10 +1,11 @@
 import React from 'react';
 import { RegisterForm } from '../components';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import { postRegister } from '../modules/register';
 
 const RegisterContainer = () => {
+  const dispatch = useDispatch();
   const pending = useSelector((state: RootState) => state.register.pending);
   const error = useSelector((state: RootState) => state.register.error);
   const id = useSelector((state: RootState) => state.register.data.id);
@@ -16,8 +17,8 @@ const RegisterContainer = () => {
     email: string,
     displayedName: string,
     password: string,
-  ) => () => {
-    postRegister(email, displayedName, password);
+  ) => {
+    postRegister(email, displayedName, password)(dispatch);
   };
 
   return (

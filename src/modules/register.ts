@@ -5,10 +5,12 @@ import { server } from '../secret';
 const REGISTER_POST_PENDING = 'register/POST_PENDING' as const;
 const REGISTER_POST_SUCCESS = 'register/POST_SUCCESS' as const;
 const REGISTER_POST_FAILURE = 'register/POST_FAILURE' as const;
+const REGISTER = 'register/register' as const;
 
-const registerPostPending = createAction(REGISTER_POST_PENDING);
-const registerPostSuccess = createAction(REGISTER_POST_SUCCESS);
-const reigsterPostFailure = createAction(REGISTER_POST_FAILURE);
+const registerPending = createAction(REGISTER_POST_PENDING);
+const registerSuccess = createAction(REGISTER_POST_SUCCESS);
+const registerFailure = createAction(REGISTER_POST_FAILURE);
+const register = createAction(REGISTER);
 
 // export const register = createAction(REGISTER, tryRegister);
 // export const register = (
@@ -47,7 +49,8 @@ const requestRegister = (
     '    displayedName\n' +
     '  }\n' +
     '}';
-  return axios.post(server, query, {
+  console.log(query);
+  return axios.post('http://' + server, query, {
     headers: { 'Content-Type': 'application/graphql' },
   });
 };
@@ -57,23 +60,24 @@ export const postRegister = (
   displayedName: string,
   password: string,
 ) => (dispatch: any) => {
-  dispatch(registerPostPending());
+  console.log('starting process');
+  dispatch(registerPending());
 
   return requestRegister(email, displayedName, password)
     .then((res) => {
-      dispatch(registerPostSuccess(res));
+      dispatch(registerSuccess(res));
       return res;
     })
     .catch((err) => {
-      dispatch(reigsterPostFailure(err));
+      dispatch(registerFailure(err));
       throw err;
     });
 };
 
 export type RegisterAction =
-  | ReturnType<typeof registerPostPending>
-  | ReturnType<typeof registerPostSuccess>
-  | ReturnType<typeof reigsterPostFailure>;
+  | ReturnType<typeof registerPending>
+  | ReturnType<typeof registerSuccess>
+  | ReturnType<typeof registerFailure>;
 
 export type RegisterState = {
   pending: boolean;
@@ -98,6 +102,7 @@ const initialState: RegisterState = {
 export default handleActions(
   {
     [REGISTER_POST_PENDING]: (state, action) => {
+      console.log('pending');
       return {
         ...state,
         pending: true,
@@ -105,6 +110,7 @@ export default handleActions(
       };
     },
     [REGISTER_POST_SUCCESS]: (state, action) => {
+      console.log('post request complete');
       const {
         payload: {
           data: { id, email, displayedName },
@@ -122,11 +128,23 @@ export default handleActions(
       };
     },
     [REGISTER_POST_FAILURE]: (state, action) => {
+      console.log('post request failed');
       return {
         ...state,
         error: true,
       };
     },
+    // [REGISTER]: (state, action) => {
+    //   console.log('starting process')
+    //   const {
+    //     payload: {
+    //       data: { id, email, displayedName },
+    //     },
+    //   } = action;
+    //
+    //   postRegister(state, action);
+    //
+    // }
   },
   initialState,
 );
