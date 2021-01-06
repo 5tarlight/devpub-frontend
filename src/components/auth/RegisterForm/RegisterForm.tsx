@@ -8,8 +8,6 @@ import styles from './RegisterForm.scss';
 import classNames from 'classnames/bind';
 import AuthInput from '../AuthInput/AuthInput';
 import Button from '../../Button/Button';
-import axios from 'axios';
-import { server } from '../../../secret';
 import { useHistory } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
@@ -143,7 +141,6 @@ const RegisterForm: FC<Props> = ({
 
     if (ce && cn && pc && pcn && tc && plc) {
       onRegister(email, displayedName, password);
-      alert(success);
     }
   };
 
@@ -158,6 +155,7 @@ const RegisterForm: FC<Props> = ({
       <div className={cx('register-title')}>
         <h1>회원가입</h1>
         <p>데브라이프 계정으로 모든 서비스를 이용하실 수 있습니다.</p>
+        {success ? '처리중...' : '대기중...'}
       </div>
       <div className={cx('error-msg')}>{emailMsg}</div>
       <AuthInput
