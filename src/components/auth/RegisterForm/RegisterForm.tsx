@@ -8,13 +8,25 @@ import styles from './RegisterForm.scss';
 import classNames from 'classnames/bind';
 import AuthInput from '../AuthInput/AuthInput';
 import Button from '../../Button/Button';
-import axios from 'axios';
-import { server } from '../../../secret';
 import { useHistory } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-const RegisterForm: FC = () => {
+type Props = {
+  success: boolean;
+  id?: string;
+  email?: string;
+  displayedName?: string;
+  onRegister: (email: string, displayedName: string, password: string) => void;
+};
+
+const RegisterForm: FC<Props> = ({
+  success,
+  id,
+  email: resultMail,
+  displayedName: resultName,
+  onRegister,
+}) => {
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [emailMsg, setEmailMsg] = useState('');
@@ -128,32 +140,7 @@ const RegisterForm: FC = () => {
     const plc = checkPolicy();
 
     if (ce && cn && pc && pcn && tc && plc) {
-      console.log('start register process');
-      const query =
-        'mutation {\n' +
-        '  register(email: "' +
-        email +
-        '", displayedName: "' +
-        displayedName +
-        '", password: "' +
-        password +
-        '") {\n' +
-        '    id\n' +
-        '    email\n' +
-        '    displayedName\n' +
-        '  }\n' +
-        '}';
-      const serverRes = await axios.post(server, query, {
-        headers: { 'Content-Type': 'application/graphql' },
-      });
-
-      if (serverRes.status === 400) {
-        setEmailMsg('이미 해당 이메일이 사용 중 입니다.');
-        return;
-      } else {
-        console.dir(serverRes.data);
-        history.push('/');
-      }
+      onRegister(email, displayedName, password);
     }
   };
 
@@ -168,6 +155,7 @@ const RegisterForm: FC = () => {
       <div className={cx('register-title')}>
         <h1>회원가입</h1>
         <p>데브라이프 계정으로 모든 서비스를 이용하실 수 있습니다.</p>
+        {success ? '처리중...' : '대기중...'}
       </div>
       <div className={cx('error-msg')}>{emailMsg}</div>
       <AuthInput
