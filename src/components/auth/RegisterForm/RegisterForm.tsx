@@ -115,18 +115,21 @@ const RegisterForm: FC<Props> = ({
       target: { value },
     } = e;
     setEmail(value);
+    setEmailMsg('');
   };
   const onDisplayedNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
       target: { value },
     } = e;
     setDisplayedName(value);
+    setNameMsg('');
   };
   const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
       target: { value },
     } = e;
     setPassword(value);
+    setPwMsg('');
   };
   const onConfirmChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
@@ -134,6 +137,7 @@ const RegisterForm: FC<Props> = ({
     } = e;
 
     setConfirm(value);
+    setConfirmMsg('');
   };
 
   const onSubmit = async (
