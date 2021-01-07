@@ -23,10 +23,10 @@ type Props = {
 };
 
 const RegisterForm: FC<Props> = ({
-  success,
-  id,
-  email: resultMail,
-  displayedName: resultName,
+  // success,
+  // id,
+  // email: resultMail,
+  // displayedName: resultName,
   onRegister,
 }) => {
   const history = useHistory();
