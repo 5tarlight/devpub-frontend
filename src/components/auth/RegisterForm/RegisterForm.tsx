@@ -9,6 +9,8 @@ import classNames from 'classnames/bind';
 import AuthInput from '../AuthInput/AuthInput';
 import Button from '../../Button/Button';
 import { useHistory } from 'react-router-dom';
+// import axios from 'axios';
+// import { server } from '../../../secret';
 
 const cx = classNames.bind(styles);
 
@@ -40,7 +42,12 @@ const RegisterForm: FC<Props> = ({
   const [tosCheck, setTosCheck] = useState(false);
 
   const checkEmail = () => {
-    if (!email.includes('@') || email.split('@').length > 2) {
+    if (
+      !email.includes('@') ||
+      email.split('@').length > 2 ||
+      !email.includes('.') ||
+      email.split('.').length < 2
+    ) {
       setEmailMsg('이메일이 유효하지 않습니다.');
       return false;
     } else if (email.length > 50) {
@@ -139,8 +146,35 @@ const RegisterForm: FC<Props> = ({
     const tc = checkTos();
     const plc = checkPolicy();
 
+    // const registerLocal = (pmail: string, pname: string, ppword: string) => {
+    //   const query =
+    //     'mutation {\n' +
+    //     '  register(email: "' +
+    //     pmail +
+    //     '", displayedName: "' +
+    //     pname +
+    //     '", password: "' +
+    //     ppword +
+    //     '") {\n' +
+    //     '    id\n' +
+    //     '    email\n' +
+    //     '    displayedName\n' +
+    //     '  }\n' +
+    //     '}';
+    //   console.log(query);
+    //   axios
+    //     .post('http://' + server, query, {
+    //       headers: { 'Content-Type': 'application/graphql' },
+    //     })
+    //     .then((res) => {
+    //       alert('complete');
+    //     });
+    // };
+
     if (ce && cn && pc && pcn && tc && plc) {
       onRegister(email, displayedName, password);
+      // registerLocal(email, displayedName, password);
+      history.push('/register/success');
     }
   };
 
@@ -155,7 +189,7 @@ const RegisterForm: FC<Props> = ({
       <div className={cx('register-title')}>
         <h1>회원가입</h1>
         <p>데브라이프 계정으로 모든 서비스를 이용하실 수 있습니다.</p>
-        {success ? '처리중...' : '대기중...'}
+        {/*{success ? '처리중...' : '대기중...'}*/}
       </div>
       <div className={cx('error-msg')}>{emailMsg}</div>
       <AuthInput
