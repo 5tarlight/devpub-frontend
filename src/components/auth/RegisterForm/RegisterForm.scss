@@ -1,12 +1,5 @@
 @import '../../../styles/utils';
 
-.error-msg {
-  color: red;
-  font-style: italic;
-  margin-top: -7px;
-  font-size: 13px;
-}
-
 .register-form {
   margin-top: 5rem;
   margin-left: auto;
@@ -17,24 +10,6 @@
   padding-top: 3rem;
   padding-bottom: 10rem;
   text-align: center;
-}
-
-.submit {
-  margin-top: 10px;
-  background-color: $theme-color-0;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  width: 200px;
-  color: white;
-  height: 40px;
-  border: 2px solid $theme-color-1;
-  border-radius: 18px;
-  transition: transform 0.1s;
-
-  &:hover {
-    background-color: $theme-color-1;
-    border: 2px solid $theme-color-0;
-    transform: scale(1.1);
-  }
 }
 
 .register-title {

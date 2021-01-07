@@ -9,6 +9,7 @@ import classNames from 'classnames/bind';
 import AuthInput from '../AuthInput/AuthInput';
 import Button from '../../Button/Button';
 import { useHistory } from 'react-router-dom';
+import AuthMessage from '../AuthMessage/AuthMessage';
 // import axios from 'axios';
 // import { server } from '../../../secret';
 
@@ -191,7 +192,7 @@ const RegisterForm: FC<Props> = ({
         <p>데브라이프 계정으로 모든 서비스를 이용하실 수 있습니다.</p>
         {/*{success ? '처리중...' : '대기중...'}*/}
       </div>
-      <div className={cx('error-msg')}>{emailMsg}</div>
+      <AuthMessage msg={emailMsg} />
       <AuthInput
         err={emailMsg}
         type={'email'}
@@ -199,7 +200,7 @@ const RegisterForm: FC<Props> = ({
         placeholder={'이메일'}
         onChange={onEmailChange}
       />
-      <div className={cx('error-msg')}>{nameMsg}</div>
+      <AuthMessage msg={nameMsg} />
       <AuthInput
         err={nameMsg}
         type={'text'}
@@ -207,7 +208,7 @@ const RegisterForm: FC<Props> = ({
         placeholder={'사용자 이름'}
         onChange={onDisplayedNameChange}
       />
-      <div className={cx('error-msg')}>{pwMsg}</div>
+      <AuthMessage msg={pwMsg} />
       <AuthInput
         err={pwMsg}
         type={'password'}
@@ -215,7 +216,7 @@ const RegisterForm: FC<Props> = ({
         placeholder={'비밀번호'}
         onChange={onPasswordChange}
       />
-      <div className={cx('error-msg')}>{confirmMsg}</div>
+      <AuthMessage msg={confirmMsg} />
       <AuthInput
         err={confirmMsg}
         type={'password'}
