@@ -10,6 +10,7 @@ import AuthInput from '../AuthInput/AuthInput';
 import Button from '../../Button/Button';
 import AuthMessage from '../AuthMessage/AuthMessage';
 import { checkEmail, checkPassword } from '../authUtil';
+import { relative } from 'path';
 
 const cx = classNames.bind(styles);
 
@@ -47,10 +48,14 @@ const LoginForm: FC = () => {
 
   return (
     <div className={cx('login-form')}>
+      <div className={cx('login-title')}>
+        <h1>로그인</h1>
+        <p>데브라이프 계정으로 모든 서비스를 이용하실 수 있습니다.</p>
+      </div>
       <AuthMessage msg={emailErr} />
       <AuthInput
         type={'text'}
-        placeholder={'Email'}
+        placeholder={'이메일'}
         value={email}
         err={emailErr}
         onChange={onEmailChange}
@@ -58,12 +63,16 @@ const LoginForm: FC = () => {
       <AuthMessage msg={pwErr} />
       <AuthInput
         type={'password'}
-        placeholder={'Password'}
+        placeholder={'비밀번호'}
         value={password}
         err={pwErr}
         onChange={onPasswordChange}
       />
-      <Button value={'Log In'} onClick={onSubmit} />
+      <div className={cx('saveId')}>
+        <input type={'checkbox'} />
+        <label>아이디 저장</label>
+      </div>
+      <Button value={'로그인'} onClick={onSubmit} />
     </div>
   );
 };
