@@ -1,9 +1,15 @@
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, {
+  ChangeEvent,
+  FC,
+  useState,
+  MouseEvent as RMouseEvent,
+} from 'react';
 import styles from './LoginForm.scss';
 import classNames from 'classnames/bind';
 import AuthInput from '../AuthInput/AuthInput';
 import Button from '../../Button/Button';
 import AuthMessage from '../AuthMessage/AuthMessage';
+import { checkEmail, checkPassword } from '../authUtil';
 
 const cx = classNames.bind(styles);
 
@@ -18,12 +24,25 @@ const LoginForm: FC = () => {
       target: { value },
     } = e;
     setEmail(value);
+    setEmailErr('');
   };
   const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
       target: { value },
     } = e;
     setPassword(value);
+    setPwErr('');
+  };
+
+  const onSubmit = (e: RMouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const ce = checkEmail(email, setEmailErr);
+    const pc = checkPassword(password, setPwErr);
+
+    if (ce && pc) {
+      alert('starting login process');
+    }
   };
 
   return (
@@ -44,7 +63,7 @@ const LoginForm: FC = () => {
         err={pwErr}
         onChange={onPasswordChange}
       />
-      <Button value={'Log In'} onClick={(e) => e.preventDefault()} />
+      <Button value={'Log In'} onClick={onSubmit} />
     </div>
   );
 };
