@@ -9,8 +9,15 @@ import classNames from 'classnames/bind';
 import AuthInput from '../AuthInput/AuthInput';
 import Button from '../../Button/Button';
 import { useHistory } from 'react-router-dom';
-// import axios from 'axios';
-// import { server } from '../../../secret';
+import AuthMessage from '../AuthMessage/AuthMessage';
+import {
+  checkConfirm,
+  checkDisplayedName,
+  checkEmail,
+  checkPassword,
+  checkPolicy,
+  checkTos,
+} from '../authUtil';
 
 const cx = classNames.bind(styles);
 
@@ -41,91 +48,26 @@ const RegisterForm: FC<Props> = ({
   const [policyCheck, setPolicyCheck] = useState(false);
   const [tosCheck, setTosCheck] = useState(false);
 
-  const checkEmail = () => {
-    if (
-      !email.includes('@') ||
-      email.split('@').length > 2 ||
-      !email.includes('.') ||
-      email.split('.').length < 2
-    ) {
-      setEmailMsg('이메일이 유효하지 않습니다.');
-      return false;
-    } else if (email.length > 50) {
-      setEmailMsg('이메일이 너무 깁니다.');
-      return false;
-    } else {
-      setEmailMsg('');
-      return true;
-    }
-  };
-  const checkDisplayedName = () => {
-    if (!displayedName) {
-      setNameMsg('사용자 이름을 입력해주세요.');
-      return false;
-    } else if (displayedName.length > 30) {
-      setNameMsg('사용자 이름이 너무 깁니다.');
-      return false;
-    } else {
-      setNameMsg('');
-      return true;
-    }
-  };
-  const checkPassword = () => {
-    if (!password) {
-      setPwMsg('비밀번호를 입력해주세요.');
-      return false;
-    } else if (password.length < 4) {
-      setPwMsg('비밀번호가 너무 짧습니다.');
-      return false;
-    } else if (password.length > 20) {
-      setPwMsg('비밀번호가 너무 깁니다.');
-      return false;
-    } else {
-      setPwMsg('');
-      return true;
-    }
-  };
-  const checkConfirm = () => {
-    if (confirm !== password) {
-      setConfirmMsg('비밀번호가 일치하지 않습니다.');
-      return false;
-    } else {
-      setConfirmMsg('');
-      return true;
-    }
-  };
-  const checkTos = () => {
-    if (tosCheck) return true;
-    else {
-      alert('서비스 이용약관에 동의해 주세요.');
-      return false;
-    }
-  };
-  const checkPolicy = () => {
-    if (policyCheck) return true;
-    else {
-      alert('개인정보 처리방침에 동의해주세요.');
-      return false;
-    }
-  };
-
   const onEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
       target: { value },
     } = e;
     setEmail(value);
+    setEmailMsg('');
   };
   const onDisplayedNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
       target: { value },
     } = e;
     setDisplayedName(value);
+    setNameMsg('');
   };
   const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
       target: { value },
     } = e;
     setPassword(value);
+    setPwMsg('');
   };
   const onConfirmChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {
@@ -133,47 +75,22 @@ const RegisterForm: FC<Props> = ({
     } = e;
 
     setConfirm(value);
+    setConfirmMsg('');
   };
 
   const onSubmit = async (
     e: ReactMouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     e.preventDefault();
-    const ce = checkEmail();
-    const cn = checkDisplayedName();
-    const pc = checkPassword();
-    const pcn = checkConfirm();
-    const tc = checkTos();
-    const plc = checkPolicy();
-
-    // const registerLocal = (pmail: string, pname: string, ppword: string) => {
-    //   const query =
-    //     'mutation {\n' +
-    //     '  register(email: "' +
-    //     pmail +
-    //     '", displayedName: "' +
-    //     pname +
-    //     '", password: "' +
-    //     ppword +
-    //     '") {\n' +
-    //     '    id\n' +
-    //     '    email\n' +
-    //     '    displayedName\n' +
-    //     '  }\n' +
-    //     '}';
-    //   console.log(query);
-    //   axios
-    //     .post('http://' + server, query, {
-    //       headers: { 'Content-Type': 'application/graphql' },
-    //     })
-    //     .then((res) => {
-    //       alert('complete');
-    //     });
-    // };
+    const ce = checkEmail(email, setEmailMsg);
+    const cn = checkDisplayedName(displayedName, setNameMsg);
+    const pc = checkPassword(password, setPwMsg);
+    const pcn = checkConfirm(confirm, password, setConfirmMsg);
+    const tc = checkTos(tosCheck);
+    const plc = checkPolicy(policyCheck);
 
     if (ce && cn && pc && pcn && tc && plc) {
       onRegister(email, displayedName, password);
-      // registerLocal(email, displayedName, password);
       history.push('/register/success');
     }
   };
@@ -191,7 +108,7 @@ const RegisterForm: FC<Props> = ({
         <p>데브라이프 계정으로 모든 서비스를 이용하실 수 있습니다.</p>
         {/*{success ? '처리중...' : '대기중...'}*/}
       </div>
-      <div className={cx('error-msg')}>{emailMsg}</div>
+      <AuthMessage msg={emailMsg} />
       <AuthInput
         err={emailMsg}
         type={'email'}
@@ -199,7 +116,7 @@ const RegisterForm: FC<Props> = ({
         placeholder={'이메일'}
         onChange={onEmailChange}
       />
-      <div className={cx('error-msg')}>{nameMsg}</div>
+      <AuthMessage msg={nameMsg} />
       <AuthInput
         err={nameMsg}
         type={'text'}
@@ -207,7 +124,7 @@ const RegisterForm: FC<Props> = ({
         placeholder={'사용자 이름'}
         onChange={onDisplayedNameChange}
       />
-      <div className={cx('error-msg')}>{pwMsg}</div>
+      <AuthMessage msg={pwMsg} />
       <AuthInput
         err={pwMsg}
         type={'password'}
@@ -215,7 +132,7 @@ const RegisterForm: FC<Props> = ({
         placeholder={'비밀번호'}
         onChange={onPasswordChange}
       />
-      <div className={cx('error-msg')}>{confirmMsg}</div>
+      <AuthMessage msg={confirmMsg} />
       <AuthInput
         err={confirmMsg}
         type={'password'}
