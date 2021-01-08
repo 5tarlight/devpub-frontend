@@ -10,6 +10,7 @@ import AuthInput from '../AuthInput/AuthInput';
 import Button from '../../Button/Button';
 import AuthMessage from '../AuthMessage/AuthMessage';
 import { checkEmail, checkPassword } from '../authUtil';
+import { relative } from 'path';
 
 const cx = classNames.bind(styles);
 
