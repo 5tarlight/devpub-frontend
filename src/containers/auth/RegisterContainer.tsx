@@ -1,13 +1,13 @@
 import React from 'react';
-import { RegisterForm } from '../components';
+import { RegisterForm } from '../../components';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../modules';
-import { postRegister } from '../modules/register';
+import { RootState } from '../../modules';
+import { postRegister } from '../../modules/register';
 
 const RegisterContainer = () => {
   const dispatch = useDispatch();
   const pending = useSelector((state: RootState) => state.register.pending);
-  const error = useSelector((state: RootState) => state.register.error);
+  // const error = useSelector((state: RootState) => state.register.error);
   const id = useSelector((state: RootState) => state.register.data.id);
   const email = useSelector((state: RootState) => state.register.data.email);
   const displayedName = useSelector(
