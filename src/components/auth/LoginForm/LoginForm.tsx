@@ -3,6 +3,7 @@ import styles from './LoginForm.scss';
 import classNames from 'classnames/bind';
 import AuthInput from '../AuthInput/AuthInput';
 import Button from '../../Button/Button';
+import AuthMessage from '../AuthMessage/AuthMessage';
 
 const cx = classNames.bind(styles);
 
@@ -27,6 +28,7 @@ const LoginForm: FC = () => {
 
   return (
     <div className={cx('login-form')}>
+      <AuthMessage msg={emailErr} />
       <AuthInput
         type={'text'}
         placeholder={'Email'}
@@ -34,6 +36,7 @@ const LoginForm: FC = () => {
         err={emailErr}
         onChange={onEmailChange}
       />
+      <AuthMessage msg={pwErr} />
       <AuthInput
         type={'password'}
         placeholder={'Password'}
@@ -41,7 +44,7 @@ const LoginForm: FC = () => {
         err={pwErr}
         onChange={onPasswordChange}
       />
-      <Button value={'Log In'} onClick={() => {}} />
+      <Button value={'Log In'} onClick={(e) => e.preventDefault()} />
     </div>
   );
 };
