@@ -6,10 +6,13 @@ const cx = classNames.bind(styles);
 
 type Props = {
   msg: string;
+  noDecorate?: boolean;
 };
 
-const AuthMessage: FC<Props> = ({ msg }) => {
-  return <div className={cx('error-msg')}>{msg}</div>;
+const AuthMessage: FC<Props> = ({ msg, noDecorate = false }) => {
+  return (
+    <div className={cx('error-msg', { 'no-decorate': noDecorate })}>{msg}</div>
+  );
 };
 
 export default AuthMessage;

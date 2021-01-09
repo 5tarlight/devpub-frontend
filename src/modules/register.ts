@@ -49,7 +49,6 @@ const requestRegister = (
     '    displayedName\n' +
     '  }\n' +
     '}';
-  console.log(query);
   return axios.post('http://' + server, query, {
     headers: { 'Content-Type': 'application/graphql' },
   });
@@ -60,7 +59,6 @@ export const postRegister = (
   displayedName: string,
   password: string,
 ) => (dispatch: any) => {
-  console.log('starting process');
   dispatch(registerPending());
 
   return requestRegister(email, displayedName, password)
@@ -102,7 +100,6 @@ const initialState: RegisterState = {
 export default handleActions(
   {
     [REGISTER_POST_PENDING]: (state, action) => {
-      console.log('pending');
       return {
         ...state,
         pending: true,
@@ -110,7 +107,6 @@ export default handleActions(
       };
     },
     [REGISTER_POST_SUCCESS]: (state, action) => {
-      console.log('post request complete');
       const {
         payload: {
           data: { id, email, displayedName },
@@ -128,7 +124,6 @@ export default handleActions(
       };
     },
     [REGISTER_POST_FAILURE]: (state, action) => {
-      console.log('post request failed');
       return {
         ...state,
         error: true,
