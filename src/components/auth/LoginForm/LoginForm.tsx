@@ -12,10 +12,16 @@ import AuthMessage from '../AuthMessage/AuthMessage';
 import { checkEmail, checkPassword } from '../authUtil';
 import axios from 'axios';
 import { server } from '../../../secret';
+import { useHistory } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-const LoginForm: FC = () => {
+type Props = {
+  setIsLoggedIn(value: boolean): any;
+};
+
+const LoginForm: FC<Props> = ({ setIsLoggedIn }) => {
+  const history = useHistory();
   const [loginMsg, setLoginMsg] = useState('');
   const [email, setEmail] = useState('');
   const [emailErr, setEmailErr] = useState('');
@@ -59,20 +65,24 @@ const LoginForm: FC = () => {
           headers: { 'Content-Type': 'application/graphql' },
         })
         .then((r) => {
-          return r.data;
+          return r.data.data.login;
         })
         .then((data) => {
           if (!Boolean(data.success)) {
             setLoginMsg('메일이나 비밀번호가 일치하지 않습니다.');
             return;
           }
+
+          setLoginMsg('');
+          localStorage.setItem('loggedIn', data.success);
+          localStorage.setItem('email', data.user.email);
+          localStorage.setItem('displayedName', data.user.displayedName);
+          localStorage.setItem('uuid', data.user.id);
+
+          setIsLoggedIn(true);
+          history.push('/');
         });
     }
-  };
-
-  const loginStyle = {
-    margin: '0px',
-    textDecoration: 'none',
   };
 
   return (

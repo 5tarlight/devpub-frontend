@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Router from './Router';
 
 const App = () => {
-  const [isLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  return <Router isLoggedIn={isLoggedIn} />;
+  useEffect(() => {
+    console.dir(Boolean(localStorage.getItem('loggedIn')));
+    setIsLoggedIn(Boolean(localStorage.getItem('loggedIn')));
+  }, []);
+
+  return <Router isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />;
 };
 
 export default App;
