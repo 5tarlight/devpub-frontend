@@ -26,7 +26,9 @@ const requestLogin = (email: string, password: string) => {
   });
 };
 
-const postLogin = (email: string, password: string) => (dispatch: any) => {
+export const postLogin = (email: string, password: string) => (
+  dispatch: any,
+) => {
   dispatch(loginPending());
 
   return requestLogin(email, password)
@@ -40,19 +42,19 @@ const postLogin = (email: string, password: string) => (dispatch: any) => {
     });
 };
 
-export type LoginType = 
+export type LoginType =
   | ReturnType<typeof loginPending>
   | ReturnType<typeof loginSuccess>
   | ReturnType<typeof loginFailure>;
 
 export type LoginState = {
-  pending: boolean,
-  error: boolean,
+  pending: boolean;
+  error: boolean;
   data: {
-    id: string,
-    displayedName: string,
-    email: string,
-  }
+    id: string;
+    displayedName: string;
+    email: string;
+  };
 };
 
 const initialState: LoginState = {
@@ -61,39 +63,42 @@ const initialState: LoginState = {
   data: {
     id: '',
     email: '',
-    displayedName: ''
-  }
-}
-
-export default handleActions({
-  [LOGIN_PENDING]: (state, action) => {
-    return {
-      ...state,
-      pending: true,
-      error: false,
-    };
+    displayedName: '',
   },
-  [LOGIN_FAILURE]: (state, action) => {
-    return {
-      ...state,
-      error: true,
-    };
-  },
-  [LOGIN_SUCCESS]: (state, action) => {
-    const {
-      payload: {
-        data: { id, email, displayedName },
-      },
-    } = action;
+};
 
-    return {
-      ...state,
-      pending: false,
-      data: {
-        id,
-        email,
-        displayedName,
-      },
-    };
-  }
-}, initialState);
+export default handleActions(
+  {
+    [LOGIN_PENDING]: (state, action) => {
+      return {
+        ...state,
+        pending: true,
+        error: false,
+      };
+    },
+    [LOGIN_FAILURE]: (state, action) => {
+      return {
+        ...state,
+        error: true,
+      };
+    },
+    [LOGIN_SUCCESS]: (state, action) => {
+      const {
+        payload: {
+          data: { id, email, displayedName },
+        },
+      } = action;
+
+      return {
+        ...state,
+        pending: false,
+        data: {
+          id,
+          email,
+          displayedName,
+        },
+      };
+    },
+  },
+  initialState,
+);

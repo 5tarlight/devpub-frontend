@@ -10,11 +10,13 @@ import AuthInput from '../AuthInput/AuthInput';
 import Button from '../../Button/Button';
 import AuthMessage from '../AuthMessage/AuthMessage';
 import { checkEmail, checkPassword } from '../authUtil';
-import { relative } from 'path';
+import axios from 'axios';
+import { server } from '../../../secret';
 
 const cx = classNames.bind(styles);
 
 const LoginForm: FC = () => {
+  const [loginMsg, setLoginMsg] = useState('');
   const [email, setEmail] = useState('');
   const [emailErr, setEmailErr] = useState('');
   const [password, setPassword] = useState('');
@@ -42,8 +44,35 @@ const LoginForm: FC = () => {
     const pc = checkPassword(password, setPwErr);
 
     if (ce && pc) {
-      alert('starting login process');
+      const query = `query {
+  login(email:"${email}", password:"${password}") {
+    success
+    user {
+      id
+      email
+      displayedName
     }
+  }
+}`;
+      axios
+        .post('http://' + server, query, {
+          headers: { 'Content-Type': 'application/graphql' },
+        })
+        .then((r) => {
+          return r.data;
+        })
+        .then((data) => {
+          if (!Boolean(data.success)) {
+            setLoginMsg('메일이나 비밀번호가 일치하지 않습니다.');
+            return;
+          }
+        });
+    }
+  };
+
+  const loginStyle = {
+    margin: '0px',
+    textDecoration: 'none',
   };
 
   return (
@@ -52,6 +81,7 @@ const LoginForm: FC = () => {
         <h1>로그인</h1>
         <p>데브라이프 계정으로 모든 서비스를 이용하실 수 있습니다.</p>
       </div>
+      <AuthMessage msg={loginMsg} noDecorate />
       <AuthMessage msg={emailErr} />
       <AuthInput
         type={'text'}
