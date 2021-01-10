@@ -15,7 +15,7 @@ const HeaderLogo = () => {
 
   return (
     <img
-      className={cx('header-logo')}
+      className={cx('header-logo', 'no-drag')}
       onClick={handleClick}
       src={logo}
       alt={'DevPub'}
