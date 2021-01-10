@@ -18,6 +18,7 @@ const Header: FC<Props> = ({ isLoggedIn }) => {
     { to: '/', value: '홈', shouldLoggedIn: 0 },
     { to: '/login', value: '로그인', shouldLoggedIn: -1 },
     { to: '/register', value: '회원가입', shouldLoggedIn: -1 },
+    { to: '/logout', value: '로그아웃', shouldLoggedIn: 1 },
     { to: '/profile', value: '프로필', shouldLoggedIn: 1 },
   ];
 

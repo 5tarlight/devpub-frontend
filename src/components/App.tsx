@@ -5,7 +5,6 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    console.dir(Boolean(localStorage.getItem('loggedIn')));
     setIsLoggedIn(Boolean(localStorage.getItem('loggedIn')));
   }, []);
 
