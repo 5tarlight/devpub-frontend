@@ -19,8 +19,8 @@ const HeaderLogo = () => {
       onClick={handleClick}
       src={logo}
       alt={'DevPub'}
-      height={'72px'}
-      width={'72px'}
+      height={'48px'}
+      width={'48px'}
     />
   );
 };

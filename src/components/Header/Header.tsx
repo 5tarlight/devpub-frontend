@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { NavLink } from 'react-router-dom';
 import style from './Header.scss';
 import classNames from 'classnames/bind';
 import HeaderLogo from './HeaderLogo/HeaderLogo';
+import HeaderNav from './HeaderNav/HeaderNav';
 
 const cx = classNames.bind(style);
 
@@ -23,22 +23,12 @@ const Header: FC<Props> = ({ isLoggedIn }) => {
     { to: '/profile', value: '프로필', shouldLoggedIn: 1 },
   ];
 
-  const navs = headerItems
-    .filter(
-      (i) =>
-        i.shouldLoggedIn == 0 ||
-        (i.shouldLoggedIn == -1 && !isLoggedIn) ||
-        (i.shouldLoggedIn == 1 && isLoggedIn),
-    )
-    .map((item, i) => (
-      <NavLink to={item.to} key={i} className={cx('header-item', 'no-drag')}>
-        {item.value}
-      </NavLink>
-    ));
-
   return (
     <header className={cx('header')}>
       <HeaderLogo />
+      <HeaderNav text={'글쓰기'} to={'/write'} />
+      <HeaderNav text={'글쓰기'} to={'/write'} />
+      <HeaderNav text={'글쓰기'} to={'/write'} />
     </header>
   );
 };

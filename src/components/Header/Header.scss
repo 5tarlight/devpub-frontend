@@ -2,29 +2,7 @@
 
 .header {
   background: $theme-color-0;
-  display: table;
-  table-layout: fixed;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.16);
   width: 100%;
-  height: 72px;
-
-  .header-item {
-    text-align: center;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    display: table-cell;
-    color: white;
-    text-decoration: none;
-    font-size: 1.1rem;
-    transition: 0.2s;
-
-    &:hover {
-      background-color: $theme-color-1;
-    }
-
-    &.clicked {
-      background: white;
-      color: #5c7cfa;
-    }
-  }
+  height: 48px;
 }

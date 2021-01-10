@@ -99,7 +99,7 @@ const initialState: RegisterState = {
 
 export default handleActions(
   {
-    [REGISTER_POST_PENDING]: (state, action) => {
+    [REGISTER_POST_PENDING]: (state) => {
       return {
         ...state,
         pending: true,
@@ -123,7 +123,7 @@ export default handleActions(
         },
       };
     },
-    [REGISTER_POST_FAILURE]: (state, action) => {
+    [REGISTER_POST_FAILURE]: (state) => {
       return {
         ...state,
         error: true,
