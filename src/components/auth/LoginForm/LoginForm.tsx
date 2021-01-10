@@ -65,19 +65,24 @@ const LoginForm: FC<Props> = ({ setIsLoggedIn }) => {
           headers: { 'Content-Type': 'application/graphql' },
         })
         .then((r) => {
-          return r.data.data.login;
+          return r.data;
         })
         .then((data) => {
-          if (!Boolean(data.success)) {
+          if (!data.data) {
+            setLoginMsg('메일이나 비밀번호가 일치하지 않습니다.');
+            return;
+          }
+          const res = data.data.login;
+          if (!Boolean(res.success)) {
             setLoginMsg('메일이나 비밀번호가 일치하지 않습니다.');
             return;
           }
 
           setLoginMsg('');
-          localStorage.setItem('loggedIn', data.success);
-          localStorage.setItem('email', data.user.email);
-          localStorage.setItem('displayedName', data.user.displayedName);
-          localStorage.setItem('uuid', data.user.id);
+          localStorage.setItem('loggedIn', res.success);
+          localStorage.setItem('email', res.user.email);
+          localStorage.setItem('displayedName', res.user.displayedName);
+          localStorage.setItem('uuid', res.user.id);
 
           setIsLoggedIn(true);
           history.push('/');
