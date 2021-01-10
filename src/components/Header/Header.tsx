@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import style from './Header.scss';
 import classNames from 'classnames/bind';
+import HeaderLogo from './HeaderLogo/HeaderLogo';
 
 const cx = classNames.bind(style);
 
@@ -35,7 +36,11 @@ const Header: FC<Props> = ({ isLoggedIn }) => {
       </NavLink>
     ));
 
-  return <header className={cx('header')}>{navs}</header>;
+  return (
+    <header className={cx('header')}>
+      <HeaderLogo />
+    </header>
+  );
 };
 
 export default Header;
