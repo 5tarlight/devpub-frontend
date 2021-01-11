@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import styles from './Headernav.scss';
+import styles from './HeaderNav.scss';
 import classNames from 'classnames/bind';
 import { NavLink } from 'react-router-dom';
 
