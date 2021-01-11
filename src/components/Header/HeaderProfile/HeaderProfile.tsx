@@ -16,6 +16,9 @@ const HeaderProfile: FC<Props> = ({ isLoggedIn }) => {
     e.preventDefault();
     dropdown.current?.classList.toggle('show');
   };
+  const closeOnClick = () => {
+    dropdown.current?.classList.toggle('show');
+  };
 
   return (
     <div className={cx('header-profile', 'no-drag')}>
@@ -28,13 +31,21 @@ const HeaderProfile: FC<Props> = ({ isLoggedIn }) => {
       <div ref={dropdown} className={cx('dropdown-content')}>
         {isLoggedIn ? (
           <>
-            <HeaderProfileItem to={'/profile'}>프로필</HeaderProfileItem>
-            <HeaderProfileItem to={'/logout'}>로그아웃</HeaderProfileItem>
+            <HeaderProfileItem closeOnClick={closeOnClick} to={'/profile'}>
+              프로필
+            </HeaderProfileItem>
+            <HeaderProfileItem closeOnClick={closeOnClick} to={'/logout'}>
+              로그아웃
+            </HeaderProfileItem>
           </>
         ) : (
           <>
-            <HeaderProfileItem to={'/login'}>로그인</HeaderProfileItem>
-            <HeaderProfileItem to={'/register'}>회원가입</HeaderProfileItem>
+            <HeaderProfileItem closeOnClick={closeOnClick} to={'/login'}>
+              로그인
+            </HeaderProfileItem>
+            <HeaderProfileItem closeOnClick={closeOnClick} to={'/register'}>
+              회원가입
+            </HeaderProfileItem>
           </>
         )}
       </div>
