@@ -1,0 +1,14 @@
+.profile-link {
+  padding: 8px 12px;
+  text-decoration: none;
+  color: black;
+
+  &:hover {
+    background-color: #ddd;
+  }
+
+  .dd-item {
+    text-decoration: none;
+    color: black;
+  }
+}
