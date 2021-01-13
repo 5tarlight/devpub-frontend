@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Home, Login, NotFound, Register } from '../pages';
 import { Header, Footer } from './index';
 import LogoutContainer from '../containers/auth/LogoutContainer';
+import Profile from '../pages/Profile';
 
 type Props = {
   isLoggedIn: boolean;
@@ -26,6 +27,7 @@ const Router: FC<Props> = ({ isLoggedIn, setIsLoggedIn }) => {
           path={'/logout'}
           render={() => <LogoutContainer setIsLoggedIn={setIsLoggedIn} />}
         />
+        <Route exact path={'/profile'} component={Profile} />
         <Route component={NotFound} />
       </Switch>
       <Footer />
