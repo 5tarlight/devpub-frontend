@@ -5,11 +5,11 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(style);
 
 const Footer: FC = () => {
-  const thisYear = new Date().getFullYear();
+  const year = new Date().getFullYear();
 
   return (
     <div className={cx('footer')}>
-      <p>ⓒ 2020-{thisYear} DevLife All Rights Reserved.</p>
+      <p>&copy; 2020-{year} DevLife. All rights reserved.</p>
     </div>
   );
 };
