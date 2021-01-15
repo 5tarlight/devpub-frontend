@@ -1,19 +1,5 @@
 .profile-template {
   width: 100%;
   height: 100%;
-  padding: 50px 20px 0px;
-
-  .picture-box {
-    border: #c2c2c2 2px solid;
-    width: 512px;
-    justify-content: center;
-    border-radius: 10px;
-
-    box-shadow: 0 0.4px 2.2px rgba(0, 0, 0, 0.007),
-    0 1px 5.3px rgba(0, 0, 0, 0.014),
-    0 1.9px 10px rgba(0, 0, 0, 0.019),
-    0 3.4px 17.9px rgba(0, 0, 0, 0.024),
-    0 6.3px 33.4px rgba(0, 0, 0, 0.03),
-    0 15px 80px rgba(0, 0, 0, 0.05);
-  }
+  padding: 50px 20px 0;
 }
