@@ -4,7 +4,7 @@ import { useTitle } from 'react-use';
 import { useHistory } from 'react-router-dom';
 
 const Register = () => {
-  useTitle('DevPub - Sign Up')
+  useTitle('DevPub - Sign Up');
 
   const history = useHistory();
 
@@ -12,8 +12,7 @@ const Register = () => {
     const isLoggedIn = localStorage.getItem('loggedIn');
 
     if (!isLoggedIn) history.push('/');
-  }, [])
-
+  }, []);
 
   return <RegisterContainer />;
 };

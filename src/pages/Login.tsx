@@ -16,8 +16,7 @@ const Login: FC<Props> = ({ setIsLoggedIn }) => {
     const isLoggedIn = localStorage.getItem('loggedIn');
 
     if (isLoggedIn) history.push('/');
-  }, [])
-
+  }, []);
 
   return <LoginContainer setIsLoggedIn={setIsLoggedIn} />;
 };

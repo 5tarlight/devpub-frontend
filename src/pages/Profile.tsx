@@ -12,8 +12,7 @@ const Profile = () => {
     const isLoggedIn = localStorage.getItem('loggedIn');
 
     if (!isLoggedIn) history.push('/login');
-  }, [])
-
+  }, []);
 
   return <ProfileInfo />;
 };
