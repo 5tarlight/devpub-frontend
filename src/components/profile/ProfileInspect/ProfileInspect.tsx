@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import styles from './ProfileInspect.scss';
 import classNames from 'classnames/bind';
 
@@ -7,6 +7,10 @@ const cx = classNames.bind(styles);
 const ProfileInspect = () => {
   const [nameMode, setNameMode] = useState(false);
   const [emailMode, setEmailMode] = useState(false);
+  const [nameValue, setNameValue] = useState(
+    localStorage.getItem('displayedName'),
+  );
+  const [emailValue, setEmailValue] = useState(localStorage.getItem('email'));
 
   const toggleNameMode = () => {
     setNameMode((current) => !current);
@@ -14,12 +18,24 @@ const ProfileInspect = () => {
   const toggleEmailMode = () => {
     setEmailMode((current) => !current);
   };
+  const onNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { value },
+    } = e;
+    setNameValue(value);
+  };
+  const onEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const {
+      target: { value },
+    } = e;
+    setEmailValue(value);
+  };
 
   return (
     <div className={cx('profile-info')}>
       {nameMode ? (
         <div>
-          <input />
+          <input value={nameValue || ''} onChange={onNameChange} />
           <button>저장</button>
         </div>
       ) : (
@@ -32,7 +48,7 @@ const ProfileInspect = () => {
       )}
       {emailMode ? (
         <div>
-          <input />
+          <input value={emailValue || ''} onChange={onEmailChange} />
           <button>저장</button>
         </div>
       ) : (
