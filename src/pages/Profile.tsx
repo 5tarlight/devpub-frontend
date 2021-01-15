@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react';
-import RegisterContainer from '../containers/auth/RegisterContainer';
+import ProfileInfo from '../components/profile/ProfileInfo/ProfileInfo';
 import { useTitle } from 'react-use';
 import { useHistory } from 'react-router-dom';
 
-const Register = () => {
-  useTitle('DevPub - Sign Up');
+const Profile = () => {
+  useTitle('DevPub - Profile');
 
   const history = useHistory();
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('loggedIn');
 
-    if (!isLoggedIn) history.push('/');
+    if (!isLoggedIn) history.push('/login');
   }, []);
 
-  return <RegisterContainer />;
+  return <ProfileInfo />;
 };
 
-export default Register;
+export default Profile;
