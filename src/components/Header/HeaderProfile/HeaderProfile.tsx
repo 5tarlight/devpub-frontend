@@ -3,6 +3,7 @@ import styles from './HeaderProfile.scss';
 import unknownProfile from './unknwon.png';
 import classNames from 'classnames/bind';
 import HeaderProfileItem from '../HeaderProfileItem/HeaderProfileItem';
+import HeaderBackground from '../HeaderBackground/HeaderBackground';
 
 const cx = classNames.bind(styles);
 
@@ -12,6 +13,7 @@ type Props = {
 
 const HeaderProfile: FC<Props> = ({ isLoggedIn }) => {
   const dropdown = createRef<HTMLDivElement>();
+  const background = createRef<HTMLDivElement>();
   const handleShow = (e: RMouseEvent<HTMLImageElement>) => {
     e.preventDefault();
     dropdown.current?.classList.toggle('show');
