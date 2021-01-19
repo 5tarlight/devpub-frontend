@@ -1,0 +1,14 @@
+.dropdown-background {
+  background-color: transparent;
+  z-index: 99;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+
+  .show {
+    display: block;
+  }
+}
