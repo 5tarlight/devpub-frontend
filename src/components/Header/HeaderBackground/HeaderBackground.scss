@@ -11,4 +11,7 @@
   .show {
     display: block;
   }
+  &:hover {
+    cursor: default;
+  }
 }
